@@ -24,6 +24,7 @@ Since an empty string reads the same forward and backward, it is a palindrome.
 
 fun main() {
     println(isPalindrome("A man, a plan, a canal: Panama"))
+    println(isPalindrome2(" civic "))
 }
 
 fun isPalindrome(s: String): Boolean {
@@ -37,6 +38,22 @@ fun isPalindrome(s: String): Boolean {
         if (cleanedString[p1]!=cleanedString[p2]) {
             return false
         }
+        p1++
+        p2--
+    }
+    return true
+}
+
+fun isPalindrome2(text: String) : Boolean {
+    //radar
+    //p1 p2
+    var p1 = 0
+    var p2 = text.length-1
+    while (p1 < p2) {
+        val t1 = text[p1]
+        val t2 = text[p2]
+        if (t1!=t2) return false
+
         p1++
         p2--
     }

@@ -25,6 +25,18 @@ rotate 2 steps to the right: [3,99,-1,-100]
 fun main() {
     println(rotate1(intArrayOf(1,2,3,4,5,6,7),3).toList()) //best solution
     println(rotate2(intArrayOf(1,2,3,4,5,6,7),3).toList())
+    println(rotateLeft(arrayOf(1,2,3,4,5),4).toList())
+}
+
+//rotate to left (index - k + size) % size
+fun rotateLeft(nums: Array<Int>, k: Int) : Array<Int> {
+    val size = nums.size
+    val result = IntArray(size)
+    nums.forEachIndexed { index, item ->
+        val newPosition = (index - k + size) % size
+        result[newPosition] = item
+    }
+    return result.copyInto(nums.toIntArray()).toTypedArray()
 }
 
 fun rotate1(nums: IntArray, k: Int) : IntArray {
@@ -60,3 +72,5 @@ fun rotate2(nums: IntArray, k: Int) : IntArray {
     }
     return nums
 }
+
+//rotate array x quantity of steps

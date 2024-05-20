@@ -1,5 +1,3 @@
-import kotlin.jvm.internal.Intrinsics.Kotlin
-import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
 
@@ -30,6 +28,8 @@ Output: 1
 fun main() {
     println(maxArea(intArrayOf(6,5,4,3,2,1)))
     println(maxArea2(intArrayOf(1,2,1)))
+    println(maxAreaForceSolution(intArrayOf(1,8,6,2,5,4,8,3,7)))
+    println(maxAreaBestApproachByMe(intArrayOf(1,8,6,2,5,4,8,3,7)))
 }
 
 fun maxArea(heights: IntArray): Int {
@@ -65,6 +65,37 @@ fun maxArea2(heights: IntArray): Int {
              }
             //maxArea = max(maxArea, currentArea)
             //maxArea = maxArea.coerceAtLeast(height[min] * distance)
+        }
+    }
+    return maxArea
+}
+
+fun maxAreaForceSolution(heights: IntArray) : Int {
+    var maxArea = 0
+    for (p1 in heights.indices) {
+        for (p2 in p1+1 ..<heights.size) {
+            val width = min(heights[p1],heights[p2])
+            val height = p2 - p1
+            val area = width * height
+            maxArea = max(maxArea,area)
+        }
+    }
+    return maxArea
+}
+
+fun maxAreaBestApproachByMe(heights: IntArray) : Int {
+    var p1 = 0
+    var p2 = heights.size-1
+    var maxArea = 0
+    while (p1 < p2) {
+        val height = min(heights[p1],heights[p2])
+        val width = p2 - p1
+        val area = width * height
+        maxArea = max(maxArea,area)
+        if (heights[p1] < heights[p2]) {
+            p1++
+        } else {
+            p2--
         }
     }
     return maxArea
